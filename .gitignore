@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+
+
+# Arquivos de log
+logs/
+*.log
+
+# Arquivos temporários
+*.tmp
+*.swp
+.DS_Store
+
+# Arquivos de configuração específicos do sistema
+Thumbs.db
