@@ -1,5 +1,6 @@
 const multer = require('multer');
 const upload = multer();
+const textProcessor = require('../utils/textProcessor');
 const Audit = require('../models/auditModel');
 const Document = require('../models/documentModel');
 
@@ -26,11 +27,15 @@ exports.createDocument = async (req, res) => {
     const fileData = req.file ? req.file.buffer : null;
     const contentType = req.file ? req.file.mimetype : null;
     const originalName = req.file ? req.file.originalname : null;
-    const documentData = { ...req.body, file: { data: fileData, contentType, originalName } };
+
+    const extractedText = await textProcessor.extractTextFromDocument(fileData, contentType);
+    const keywords = await textProcessor.identifyKeywords(extractedText);
+
+    const documentData = { ...req.body, content: extractedText, keyWords: keywords, file: { data: fileData, contentType, originalName } };
 
     const newDocument = await Document.create(documentData);
 
-    await Audit.create({ userId: req.user._id, documentId: newDocument._id, action: 'create' });
+    await Audit.create({ userId: req.user._id, username: req.user.username, documentId: newDocument._id, action: 'create' });
 
     const sanitizedDocument = newDocument.toObject();
     delete sanitizedDocument.file.data;

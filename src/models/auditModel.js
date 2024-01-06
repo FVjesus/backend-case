@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const auditSchema = new mongoose.Schema({
   userId: mongoose.Schema.Types.ObjectId,
+  username: String,
   documentId: mongoose.Schema.Types.ObjectId,
   action: { type: String, required: true },
   timestamp: { type: Date, default: Date.now },
