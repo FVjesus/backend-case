@@ -1,3 +1,5 @@
+### [Como executar o projeto](./Projeto.md)
+
 # Case para Desenvolvedor Backend: API de Gerenciamento de Documentos Jurídicos
 
 ## Olá, Caro Desenvolvedor!
