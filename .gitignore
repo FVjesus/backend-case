@@ -13,3 +13,5 @@ logs/
 
 # Arquivos de configuração específicos do sistema
 Thumbs.db
+
+.env.example

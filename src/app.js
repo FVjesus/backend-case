@@ -6,6 +6,8 @@ const documentRoutes = require('./routes/documentRoutes');
 const authRoutes = require('./routes/authRoutes');
 const auditRoutes = require('./routes/auditRoutes');
 const User = require('./models/userModel');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpecs = require('./swaggerConfig');
 
 mongoose.connect(config.db.uri);
 
@@ -29,6 +31,7 @@ app.use(bodyParser.json());
 app.use('/auth', authRoutes);
 app.use('/api', documentRoutes);
 app.use('/audit', auditRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

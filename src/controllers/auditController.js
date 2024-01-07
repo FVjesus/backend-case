@@ -1,4 +1,4 @@
-const Audit = require('../models/documentModel');
+const Audit = require('../models/auditModel');
 
 exports.listAllAudits = async (req, res) => {
   try {
